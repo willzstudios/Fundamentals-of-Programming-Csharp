@@ -6,39 +6,52 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-        //throw new System.NotImplementedException("Intended exception.");
         start:
             
             Console.WriteLine();
-            Console.WriteLine("Table of Contents:" + Environment.NewLine +
-                "1: reveal current Date and Time" + Environment.NewLine +
-                "2: sqrt of 12345" + Environment.NewLine +
-                "3: prints the first 100 members of the sequence 2, -3, 4, -5, 6, -7, 8" + Environment.NewLine +
-                "4: prints your age after 10 years" + Environment.NewLine +
-                "2.6: reveal your gender" + Environment.NewLine +
+            Console.WriteLine("TABLE OF CONTENTS:" + Environment.NewLine + Environment.NewLine +
+                "1: Reveal current Date and Time" + Environment.NewLine +
+                "2: Find the square root of any number" + Environment.NewLine +
+                "3: Convert integer to Unicode character" + Environment.NewLine +
+                "4: Age calculator" + Environment.NewLine +
+                "5: Draw me a heart! <3" + Environment.NewLine +
                 "3.1: Odd or Even?" + Environment.NewLine +
                 "3.2: Divisible by both 5 and 7?" + Environment.NewLine +
                 "3.3: 3rd digit of a 3 digit integer is 7?" + Environment.NewLine +
                 "3.5: Trapezoid area" + Environment.NewLine +
                 "3.7: equivalent mass on the moon!" + Environment.NewLine +
                 "3.8: (x,y) point within a circle? of R=5, centre (0,0)" + Environment.NewLine+
-                "3.10: rearrange 4 digit integer" + Environment.NewLine);
-            Console.WriteLine("Enter the corresponding number to access the method from the table above, for example \"3.10\"");
+                "3.10: rearrange 4-digit integer" + Environment.NewLine);
+            Console.WriteLine("    Enter the corresponding number to access the method from the table above," 
+                + Environment.NewLine + Environment.NewLine +
+                "    For example inputting \"3.10\" will start the \"rearrange 4-digit integer\" method");
             
             string menuSelection = Console.ReadLine();
-            if(menuSelection == "1")
+            Console.Clear();
+            Console.WriteLine(menuSelection);
+            if (menuSelection == "1")
             {
-                //write current date and time to console
-                DateTime now = DateTime.Now;
-                Console.WriteLine(now);
-            }
-            if(menuSelection == "2")
+                Console.WriteLine("The current date and time is : " + DateTime.Now);
+            }//current Datetime
+            else if (menuSelection == "2")
             {
-                //wirte sqrt of 12345 to console
-                string squareroot = Math.Sqrt(12345).ToString();
-                Console.WriteLine($"squareroot of 12345 is {squareroot}");
-            }
-            if(menuSelection == "3")
+            sqrtstart:
+                Console.WriteLine("Enter a number to square root:");
+                string sqrtNumber = Console.ReadLine();
+                try
+                {
+                    double floatNumber = float.Parse(sqrtNumber);
+                    double squareroot = Math.Sqrt(floatNumber);
+                    Console.WriteLine($"squareroot of {sqrtNumber} is {squareroot}");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Exception caught: please enter a number");
+                    goto sqrtstart;
+                }
+
+            }//sqrt
+            else if (menuSelection == "hiddenagain")
             {
                 //Write a program that prints the first 100 members of the sequence 2, -3, 4, -5, 6, -7, 8.
                 for (int i = 0; i < 100; i++)
@@ -53,38 +66,42 @@ namespace HelloWorld
                     }
                 }
             }
-            if (menuSelection == "4")
+            else if (menuSelection == "4")
             {
-                //Write a program that reads your age from the console and prints your age after 10 years.
-                //how to provide input into console?
-                Console.WriteLine("Want me to calculate your age + 10? (y/n)");
-                if (Console.ReadLine().Equals("y") || Console.ReadLine().Equals("Y"))
-                //if (Console.ReadKey().Key == ConsoleKey.Y) //took a while to figure this syntax..
+            yearStart:
+                Console.WriteLine("Enter the year of your birth");
+                try
                 {
-                    AgePlusTen();
+                    int birthyear = Convert.ToInt32(Console.ReadLine());
+                    int currentYear = DateTime.Now.Year;
+                    Console.WriteLine($"Your age this year is {currentYear - birthyear}");
                 }
-                else
+                catch (Exception)
                 {
-                    //do nothing;
+                    int randomYear = new Random().Next(1901, 2021);
+                    Console.WriteLine($"ERROR: please enter a year, EG: {randomYear}");
+                    goto yearStart;
                 }
-                void AgePlusTen()
-                {
-                    Console.WriteLine("Input your age:");
-                    // Create a string variable and get user input from the keyboard and store it in the variable
-                    int userAge = Convert.ToInt32(Console.ReadLine());
-                    userAge += 10;
-                    Console.WriteLine("Your age plus 10 years is " + userAge);
-                }
-            }
-            if(menuSelection == "hidden")
+
+            }//age by year
+            else if (menuSelection == "3")
             {
-                char ch = 'a';
-                //looping through figuring out what each (char)# represents
-                for (int i = 0; i < 500; i++)
+            unicodeStart:
+                Console.WriteLine("Enter an integer to reveal its Unicode character!");
+                try
                 {
-                    ch = (char)i;
-                    Console.WriteLine($"The {i}th char is {ch}");
+                    int integer = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"The Unicode character corresponding to the integer {integer} is {(char)integer}");
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Exception caught!: please enter an INTEGER");
+                    goto unicodeStart;
+                }
+
+            }//int to Unicode character
+            else if (menuSelection == "anotherhidden")
+            {
                 //practicing declaring variables: sbyte, byte, short, ushort, int, uint, long, ulong
                 //52130, -115, 4825932; 97; -10000; 20000; 224; 970,700,000; 112; -44; -1,000,000; 1990; 123456789123456789
 
@@ -115,7 +132,7 @@ namespace HelloWorld
                 char hex72 = (char)0x48;
                 Console.WriteLine("char hex72 = (char)0x48; " + hex72 + System.Environment.NewLine + "72 = 4*16 + 8 = 4*10 + 8 = 48 in hexadec");
             }
-            if(menuSelection == "2.6")
+            else if (menuSelection == "boring")
             {
                 //2.6: 6. Declare a variable isMale of type bool and assign a value to it depending on your gender.
                 Console.WriteLine("Want me to tell you your gender? (y/n)");
@@ -150,7 +167,7 @@ namespace HelloWorld
                     }
                 }
             }
-            if(menuSelection == "hidden2")
+            else if (menuSelection == "hidden2")
             {
                 //2.7: Declare two variables of type string with values "Hello" and "World". Declare a variable of type object. Assign the value obtained of concatenation of the two string variables (add space if necessary) to this variable. Print the variable of type object.
                 string str1 = "Hello";
@@ -165,18 +182,24 @@ namespace HelloWorld
                 str1 = "The \"use\" of quotations causes difficulties.";
                 Console.WriteLine(str1);
                 Console.WriteLine("\"" + str1 + "\"");
+            }
+            else if (menuSelection == "5")
+            {
                 //2.10: Write a program to print a figure in the shape of a heart by the sign "o".
-
-                Console.WriteLine("    o        o    ");
-                Console.WriteLine("  o   o    o    o");
-                Console.WriteLine("o       o        o");
-                Console.WriteLine("o                o    ");
-                Console.WriteLine(" o              o    ");
-                Console.WriteLine("   o          o    ");
-                Console.WriteLine("     o      o    ");
-                Console.WriteLine("       o  o    ");
-                Console.WriteLine("        o    ");
-
+                int randomInt = new Random().Next(1, 99);
+                char o = (char)randomInt;
+                Console.WriteLine($"    {o}        {o}    ");
+                Console.WriteLine($"  {o}   {o}    {o}    {o}");
+                Console.WriteLine($"{o}       {o}        {o}");
+                Console.WriteLine($"{o}                {o}    ");
+                Console.WriteLine($" {o}              {o}    ");
+                Console.WriteLine($"   {o}          {o}    ");
+                Console.WriteLine($"     {o}      {o}    ");
+                Console.WriteLine($"       {o}  {o}    ");
+                Console.WriteLine($"        {o}    ");
+            } //this is my fav <3!
+            else if (menuSelection == "hidden3") 
+            {
                 //2.11: Write a program that prints on the console isosceles triangle which sides consist of the copyright character "©".
                 Console.WriteLine("    ©   ");
                 Console.WriteLine("   © ©  ");
@@ -194,22 +217,14 @@ namespace HelloWorld
                 Console.WriteLine($" After swapping, int1 and int2 values are: {int11}, {int22} respectively");
 
             }
-            if (menuSelection == "3.1")
+            else if(menuSelection == "3.1")
             {
-                //3.1: Write an expression that checks whether an integer is odd or even.
-                Console.WriteLine("Want to play \"Odd or Even?\" (y/n)");
-                if (Console.ReadLine().Equals("y") || Console.ReadLine().Equals("Y"))
+                //3.1: Write an expression that checks whether an integer is odd or even.         
+                int int1;
+                integerStart:
+                Console.WriteLine("please input an integer. We'll tell you if it's odd or even:");
+                try
                 {
-                    OddorEven();
-                }
-                else
-                {
-                    //do nothing;
-                }
-                void OddorEven()
-                {
-                    int int1;
-                    Console.WriteLine("please input an integer. We'll tell you if it's odd or even:");
                     int1 = Convert.ToInt32(Console.ReadLine());
                     int1 += 1;
                     if (int1 % 2 == 0)
@@ -219,10 +234,17 @@ namespace HelloWorld
                     else
                     {
                         Console.WriteLine($"Your number was {int1 - 1} and is EVEN");
+
                     }
                 }
-            }
-            if (menuSelection == "3.2")
+                catch (Exception)
+                {
+                    Console.WriteLine("ERROR: please enter an INTEGER, try again");
+                    goto integerStart;
+                }
+                
+            }//odd or even
+            else if(menuSelection == "3.2")
             {
                 //3.2: Write a Boolean expression that checks whether a given integer is divisible by both 5 and 7, without a remainder.
                 Console.WriteLine("Want to play Is The Number divisible by both 5 and 7? (y/n)");
@@ -247,8 +269,8 @@ namespace HelloWorld
                         Console.WriteLine($"Your number {integer} is not divisible by both 5 and 7!");
                     }
                 }
-            }
-            if (menuSelection == "3.3")
+            }//divisible by 5 and 7?
+            else if(menuSelection == "3.3")
             {
                 //3.3: Write an expression that looks for a given integer if its third digit (right to left) is 7.
                 Console.WriteLine();
@@ -268,8 +290,8 @@ namespace HelloWorld
                         Console.WriteLine("The third digit is NOT 7!");
                     }
                 }
-            }
-            if(menuSelection == "3.5")
+            }//3rd digit 7?
+            else if(menuSelection == "3.5")
             {
                 //3.5: Write an expression that calculates the area of a trapezoid by given sides a, b and height h.
                 Console.WriteLine();
@@ -281,16 +303,16 @@ namespace HelloWorld
                 Console.WriteLine("enter a value for height h");
                 float hh = Convert.ToSingle(Console.ReadLine());
                 Console.WriteLine($"The trapezoid area is equal to {(aa + bb) / 2 * hh} units squared");
-            }
-            if (menuSelection == "3.7")
+            }//trapezoid area
+            else if(menuSelection == "3.7")
             {
                 //3.7: The gravitational field of the Moon is approximately 17% of that on the Earth. Write a program that calculates the weight of a man on the moon by a given weight on the Earth.
                 Console.WriteLine();
                 Console.WriteLine("Enter your mass (kg) (just numbers no need to type kg)");
                 float aa = Convert.ToSingle(Console.ReadLine());
                 Console.WriteLine($"Your weight on the moon would be equivalent to {0.17 * aa}kg on planet Earth");
-            }
-            if (menuSelection == "3.8")
+            }//moon weight
+            else if(menuSelection == "3.8")
             {
                 //3.8 Write an expression that checks for a given point {x, y} if it is within the circle K({0, 0}, R=5). Explanation: the point {0, 0} is the center of the circle and 5 is the radius.
                 float x, y;
@@ -313,8 +335,8 @@ namespace HelloWorld
                     Console.WriteLine("hey your point is NOT within teh cirlce!");
 
                 }
-            }
-            if(menuSelection == "3.10")
+            }//cartesian point within a circle?
+            else if(menuSelection == "3.10")
                 //Write a program that takes as input a four-digit number in format abcd (e.g. 2011) and performs the following actions:
                 /*
                 -Calculates the sum of the digits(in our example 2 + 0 + 1 + 1 = 4).
@@ -328,9 +350,15 @@ namespace HelloWorld
                 string digitstring = Convert.ToString(Console.ReadLine());
                 int fourdigit;
                 int[] fourdigitArray = new int[4];
+                int sum = 0;
                 try
                 {
                     fourdigit = Convert.ToInt32(digitstring);
+                    if (digitstring.Length != 4)
+                    {
+                        Console.WriteLine("Exception caught: please enter exactly 4 digits");
+                        goto fourdigit;
+                    }
                 } 
                 catch (FormatException)
                 {
@@ -339,34 +367,48 @@ namespace HelloWorld
                 }
                 catch (OverflowException)
                 {
-                Console.WriteLine("Exception caught: TOO MANY DIGITS, please enter a 4 digit integer");
-                goto fourdigit;
+                    Console.WriteLine("Exception caught: TOO MANY DIGITS, please enter a 4 digit integer");
+                    goto fourdigit;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("Exception caught: please enter exactly 4 digits");
+                    goto fourdigit;
                 }
                 finally
                 {
-                    int sum = 0;
-                    for (int i = 0; i < fourdigitArray.Length; i++)
-                    {
-                        //fourdigitArray[i] = Convert.ToInt32(digitstring[i]); //why is it converting "3" to 51 and "4" to 52 - it's because it's converting from char to int - it's returning the Unicode char integer value. right.
-                        //you have to convert char to int, not string to int.
-                    
-                        //use TYPCASTING from double to int:
-                        fourdigitArray[i] = (int)Char.GetNumericValue(digitstring[i]); //wow that's a lot of converting..
-                        //you can also do it like this:
-                        //fourdigitArray[i] = (int)Char.GetNumericValue(digitstring, i);
-                        sum = sum + fourdigitArray[i];
-                        //Console.WriteLine(sum);
-                        //Console.WriteLine(fourdigitArray[i]);
-                    }
-                    Console.WriteLine($"The sum of the digits is {sum}");
-                    Console.WriteLine();
-                    Console.WriteLine($"printing your digit as dcba from abcd (reverse order): {fourdigitArray[3]}{fourdigitArray[2]}{fourdigitArray[1]}{fourdigitArray[0]}");
+                    //the goto doesnt seem to skip finally
+                    //try catch with finally, has to always go through finally?
                 }
-                
+                for (int i = 0; i < fourdigitArray.Length; i++)
+                {
+                    //fourdigitArray[i] = Convert.ToInt32(digitstring[i]); //why is it converting "3" to 51 and "4" to 52 - it's because it's converting from char to int - it's returning the Unicode char integer value. right.
+                    //you have to convert char to int, not string to int.
 
+                    //use TYPCASTING from double to int:
+                    fourdigitArray[i] = (int)Char.GetNumericValue(digitstring[i]); //wow that's a lot of converting..
+                                                                                   //you can also do it like this:
+                                                                                   //fourdigitArray[i] = (int)Char.GetNumericValue(digitstring, i);
+                    sum = sum + fourdigitArray[i];
+                    //Console.WriteLine(sum);
+                    //Console.WriteLine(fourdigitArray[i]);
+                }
+                Console.WriteLine($"The sum of the digits is {sum}");
+                Console.WriteLine();
+                Console.WriteLine($"printing your digit as dcba from abcd (reverse order): {fourdigitArray[3]}{fourdigitArray[2]}{fourdigitArray[1]}{fourdigitArray[0]}");
+
+
+            }//rearranging a 4 digit integer
+            else if (menuSelection == "3.11")
+            {
+                //We are given a number n and a position p. Write a sequence of operations that prints the value of the bit on the position p in the number (0 or 1). Example: n=35, p=5 -> 1. Another example: n=35, p=6 -> 0.
+                //whats the point of bits.
             }
-
-        #region lastbitofcode
+            #region lastbitofcode
+            else
+            {
+                Console.WriteLine("Invalid input, please try again");
+            }
         here:
             Console.WriteLine();
             Console.WriteLine();
@@ -374,6 +416,7 @@ namespace HelloWorld
             string str123 = Convert.ToString(Console.ReadLine());
             if(str123 == "Y" || str123 == "y")
             {
+                Console.Clear();
                 goto start;
             }
             else if (str123 == "Q" || str123 == "q")
