@@ -8,22 +8,26 @@ namespace HelloWorld
         {
         start:
             
-            Console.WriteLine();
-            Console.WriteLine("TABLE OF CONTENTS:" + Environment.NewLine + Environment.NewLine +
-                "1: Reveal current Date and Time" + Environment.NewLine +
-                "2: Find the square root of any number" + Environment.NewLine +
-                "3: Convert integer to Unicode character" + Environment.NewLine +
-                "4: Age calculator" + Environment.NewLine +
-                "5: Draw me a heart! <3" + Environment.NewLine +
-                "3.1: Odd or Even?" + Environment.NewLine +
-                "3.2: Divisible by both 5 and 7?" + Environment.NewLine +
-                "3.3: 3rd digit of a 3 digit integer is 7?" + Environment.NewLine +
-                "3.5: Trapezoid area" + Environment.NewLine +
-                "3.7: equivalent mass on the moon!" + Environment.NewLine +
-                "3.8: (x,y) point within a circle? of R=5, centre (0,0)" + Environment.NewLine+
-                "3.10: rearrange 4-digit integer" + Environment.NewLine);
-            Console.WriteLine("    Enter the corresponding number to access the method from the table above," 
-                + Environment.NewLine + Environment.NewLine +
+            Console.WriteLine(); //"\r\n" does the same thing as System.Environment.NewLine and Console.Writeline();
+            Console.WriteLine("TABLE OF CONTENTS:" + "\r\n" + "\r\n" + 
+                "1: Reveal current Date and Time" + "\r\n" +
+                "2: Find the square root of any number" + "\r\n" +
+                "3: Convert integer to Unicode character" + "\r\n" +
+                "4: Age calculator" + "\r\n" +
+                "5: Draw me a heart! <3" + "\r\n" +
+                "3.1: Odd or Even?" + "\r\n" +
+                "3.2: Divisible by both 5 and 7?" + "\r\n" +
+                "3.3: 3rd digit of a 3 digit integer is 7?" + "\r\n" +
+                "3.5: Trapezoid area" + "\r\n" +
+                "3.7: equivalent mass on the moon!" + "\r\n" +
+                "3.8: (x,y) point within a circle? of R=5, centre (0,0)" + "\r\n" +
+                "3.10: rearrange 4-digit integer" + "\r\n" +
+                "3.11: base converter \r\n" +
+                "3.111: find bit value from any position of a decimal number \r\n" +
+                "3.14: Prime number detector \r\n");
+            Console.WriteLine(
+                "    Enter the corresponding number to access the method from the table above," 
+                + "\r\n\r\n" +
                 "    For example inputting \"3.10\" will start the \"rearrange 4-digit integer\" method");
             
             string menuSelection = Console.ReadLine();
@@ -217,7 +221,7 @@ namespace HelloWorld
                 Console.WriteLine($" After swapping, int1 and int2 values are: {int11}, {int22} respectively");
 
             }
-            else if(menuSelection == "3.1")
+            else if (menuSelection == "3.1")
             {
                 //3.1: Write an expression that checks whether an integer is odd or even.         
                 int int1;
@@ -244,7 +248,7 @@ namespace HelloWorld
                 }
                 
             }//odd or even
-            else if(menuSelection == "3.2")
+            else if (menuSelection == "3.2")
             {
                 //3.2: Write a Boolean expression that checks whether a given integer is divisible by both 5 and 7, without a remainder.
                 Console.WriteLine("Want to play Is The Number divisible by both 5 and 7? (y/n)");
@@ -270,7 +274,7 @@ namespace HelloWorld
                     }
                 }
             }//divisible by 5 and 7?
-            else if(menuSelection == "3.3")
+            else if (menuSelection == "3.3")
             {
                 //3.3: Write an expression that looks for a given integer if its third digit (right to left) is 7.
                 Console.WriteLine();
@@ -291,7 +295,7 @@ namespace HelloWorld
                     }
                 }
             }//3rd digit 7?
-            else if(menuSelection == "3.5")
+            else if (menuSelection == "3.5")
             {
                 //3.5: Write an expression that calculates the area of a trapezoid by given sides a, b and height h.
                 Console.WriteLine();
@@ -304,7 +308,7 @@ namespace HelloWorld
                 float hh = Convert.ToSingle(Console.ReadLine());
                 Console.WriteLine($"The trapezoid area is equal to {(aa + bb) / 2 * hh} units squared");
             }//trapezoid area
-            else if(menuSelection == "3.7")
+            else if (menuSelection == "3.7")
             {
                 //3.7: The gravitational field of the Moon is approximately 17% of that on the Earth. Write a program that calculates the weight of a man on the moon by a given weight on the Earth.
                 Console.WriteLine();
@@ -312,7 +316,7 @@ namespace HelloWorld
                 float aa = Convert.ToSingle(Console.ReadLine());
                 Console.WriteLine($"Your weight on the moon would be equivalent to {0.17 * aa}kg on planet Earth");
             }//moon weight
-            else if(menuSelection == "3.8")
+            else if (menuSelection == "3.8")
             {
                 //3.8 Write an expression that checks for a given point {x, y} if it is within the circle K({0, 0}, R=5). Explanation: the point {0, 0} is the center of the circle and 5 is the radius.
                 float x, y;
@@ -336,7 +340,7 @@ namespace HelloWorld
 
                 }
             }//cartesian point within a circle?
-            else if(menuSelection == "3.10")
+            else if (menuSelection == "3.10")
                 //Write a program that takes as input a four-digit number in format abcd (e.g. 2011) and performs the following actions:
                 /*
                 -Calculates the sum of the digits(in our example 2 + 0 + 1 + 1 = 4).
@@ -401,8 +405,80 @@ namespace HelloWorld
             }//rearranging a 4 digit integer
             else if (menuSelection == "3.11")
             {
+            baseConverter:
+                
+                Console.WriteLine("Convert from any base number to any base number!");
+                Console.WriteLine("What base would you like to convert from? EG: 10 for decimal base");
+                try
+                {
+                    int fromBase = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("What base would you like to convert to? EG: 16 for hexadecimal, 2 for binary");
+                    int toBase = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"Enter any integer to convert from base {fromBase} to base {toBase}");
+                    string number = Console.ReadLine();
+                    string result = Convert.ToString(Convert.ToInt32(number, fromBase), toBase);
+                    Console.WriteLine($"{number} from base {fromBase} is equivalent to {result} in base {toBase}");
+                }
+                catch (Exception)
+                {
+                    Console.Clear();
+                    Console.WriteLine("ERROR occurred, try using integer numbers only!");
+                    Console.WriteLine();
+                    goto baseConverter;
+                }
+            }//any base to any base converter
+            else if (menuSelection == "3.111")
+            {
                 //We are given a number n and a position p. Write a sequence of operations that prints the value of the bit on the position p in the number (0 or 1). Example: n=35, p=5 -> 1. Another example: n=35, p=6 -> 0.
-                //whats the point of bits.
+  
+                Console.WriteLine("Enter an integer and we'll find the p-th value of it's binary form");
+                string n = Console.ReadLine();
+                    //convert n to binary string
+                string binary_n = Convert.ToString(Convert.ToInt32(n, 10), 2);
+                Console.WriteLine($"The binary value of {n} is {binary_n}");
+
+                bitP:
+                Console.WriteLine("Enter an integer value for p");
+                int p = Convert.ToInt32(Console.ReadLine());
+                //checking p is within range
+                if (p<=binary_n.Length && p > 0)
+                {
+                    //return p position of binary string n
+                    char pBit = binary_n[p - 1]; //p-1 be careful! first index is 0 not 1!
+
+                    Console.WriteLine();
+                    Console.Write($"The {p}-th bit of {binary_n} is {pBit}");
+                }
+                else //go back and ask to re-enter p-value within range.
+                {
+                    Console.WriteLine("Please enter an integer within the range of the binary number length");
+                    goto bitP;
+                } 
+            }//find p-th bit value of a decimal number
+            else if (menuSelection == "3.14")
+            {
+                Console.WriteLine("Enter an integer between 1 and 100 to test if it is a Prime Number!");
+                int integer = Convert.ToInt32(Console.ReadLine());
+                if(integer>0 && integer < 101)
+                {
+                    if (integer % 2 == 0 || integer % 3 == 0 || integer % 5 == 0
+                    || integer % 7 == 0 || integer % 11 == 0 || integer % 13 == 0
+                    || integer % 17 == 0 || integer % 19 == 0 || integer % 23 == 0
+                    || integer % 29 == 0 || integer % 31 == 0 || integer % 37 == 0
+                    || integer % 41 == 0 || integer % 43 == 0 || integer % 47 == 0)
+                    {
+                        Console.WriteLine("not a prime number");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Your integer {integer} is a Prime number!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You failed to enter an integer within the range");
+                }
+                
             }
             #region lastbitofcode
             else
