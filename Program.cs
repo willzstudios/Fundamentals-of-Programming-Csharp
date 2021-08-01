@@ -9,7 +9,7 @@ namespace HelloWorld
         start:
             
             Console.WriteLine(); //"\r\n" does the same thing as System.Environment.NewLine and Console.Writeline();
-            Console.WriteLine("TABLE OF CONTENTS:" + "\r\n" + "\r\n" + 
+            Console.WriteLine("~~ TABLE OF CONTENTS: ~~" + "\r\n" + "\r\n" + 
                 "1: Reveal current Date and Time" + "\r\n" +
                 "2: Find the square root of any number" + "\r\n" +
                 "3: Convert integer to Unicode character" + "\r\n" +
@@ -27,8 +27,8 @@ namespace HelloWorld
                 "3.14: Prime number detector \r\n");
             Console.WriteLine(
                 "    Enter the corresponding number to access the method from the table above," 
-                + "\r\n\r\n" +
-                "    For example inputting \"3.10\" will start the \"rearrange 4-digit integer\" method");
+                + "\r\n" +
+                "    - For example inputting \"3.10\" will start the \"rearrange 4-digit integer\" method");
             
             string menuSelection = Console.ReadLine();
             Console.Clear();
@@ -91,7 +91,7 @@ namespace HelloWorld
             else if (menuSelection == "3")
             {
             unicodeStart:
-                Console.WriteLine("Enter an integer to reveal its Unicode character!");
+                Console.WriteLine("Enter an integer to reveal its Unicode character!(decimal UTF-16)");
                 try
                 {
                     int integer = Convert.ToInt32(Console.ReadLine());
@@ -244,6 +244,8 @@ namespace HelloWorld
                 catch (Exception)
                 {
                     Console.WriteLine("ERROR: please enter an INTEGER, try again");
+                    Console.WriteLine("    (Min acceptable value is -2147483647)");
+                    Console.WriteLine("    (Max acceptable value is 2147483647)");
                     goto integerStart;
                 }
                 
@@ -279,21 +281,37 @@ namespace HelloWorld
                 //3.3: Write an expression that looks for a given integer if its third digit (right to left) is 7.
                 Console.WriteLine();
                 Console.WriteLine("Enter a 3 digit integer, we'll tell you if the third digit is 7 or not");
-                int int1 = Convert.ToInt32(Console.ReadLine());
-                int int2;
-                if (int1 % 100 > 0)
+                thirdDigitSeven:
+
+                try
                 {
-                    int2 = int1 % 100;
-                    int2 = int2 % 10;
-                    if (int2 == 7)
+                    int int1 = Convert.ToInt32(Console.ReadLine());
+                    if(int1.ToString().Length != 3)
                     {
-                        Console.WriteLine("The third digit is 7!");
+                        Console.WriteLine("Please enter only 3 digits!");
+                        goto thirdDigitSeven;
                     }
-                    else
+                    int int2;
+                    if (int1 % 100 > 0)
                     {
-                        Console.WriteLine("The third digit is NOT 7!");
+                        int2 = int1 % 100;
+                        int2 = int2 % 10;
+                        if (int2 == 7)
+                        {
+                            Console.WriteLine("The third digit is 7!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The third digit is NOT 7!");
+                        }
                     }
                 }
+                catch //huh you don't even have to type catch(exception) here.
+                {
+                    Console.WriteLine("ERROR: please enter a 3 digit integer");
+                    goto thirdDigitSeven;
+                }
+                
             }//3rd digit 7?
             else if (menuSelection == "3.5")
             {
@@ -360,7 +378,7 @@ namespace HelloWorld
                     fourdigit = Convert.ToInt32(digitstring);
                     if (digitstring.Length != 4)
                     {
-                        Console.WriteLine("Exception caught: please enter exactly 4 digits");
+                        Console.WriteLine("ERROR: please enter exactly 4 digits");
                         goto fourdigit;
                     }
                 } 
@@ -457,6 +475,7 @@ namespace HelloWorld
             }//find p-th bit value of a decimal number
             else if (menuSelection == "3.14")
             {
+                primeNumber:
                 Console.WriteLine("Enter an integer between 1 and 100 to test if it is a Prime Number!");
                 int integer = Convert.ToInt32(Console.ReadLine());
                 if(integer>0 && integer < 101)
@@ -477,7 +496,17 @@ namespace HelloWorld
                 else
                 {
                     Console.WriteLine("You failed to enter an integer within the range");
+                    goto primeNumber;
                 }
+                
+            }//prime number detector
+            else if (menuSelection == "3.15")
+            {
+                //Write a program that exchanges the values of the bits on positions 
+                //3, 4 and 5 with bits on positions 24, 25 and 26 of a given 32 - bit unsigned integer
+                //unsigned integer?
+                Console.WriteLine("Enter an integer between 0 and 4294967295. We'll swap the 3rd 4th and 5th bit with the 24th 25th and 26th bit");
+                string thirtyTwobit = Console.ReadLine();
                 
             }
             #region lastbitofcode
